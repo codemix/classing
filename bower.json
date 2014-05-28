@@ -1,0 +1,27 @@
+{
+  "name": "classer",
+  "main": "classer.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/codemix/classer",
+  "authors": [
+    "Charles Pick <charles@codemix.com>"
+  ],
+  "description": "Easy, flexible classes for JavaScript, works in node and all modern browser (> IE8).",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "oop",
+    "classes",
+    "classer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

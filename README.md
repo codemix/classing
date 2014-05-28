@@ -1,5 +1,7 @@
 # Classer
 
+[![Build Status](https://travis-ci.org/codemix/classer.svg?branch=master)](https://travis-ci.org/codemix/classer)
+
 Easy, flexible classes for JavaScript, works in node and all modern browser (> IE8).
 
 
