@@ -39,7 +39,7 @@ person.name === 'No Name'; // => true
 
 var person = new Person({
   name: 'Bob',
-  dateOfBirth = new Date()
+  dateOfBirth: new Date()
 });
 ```
 
