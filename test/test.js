@@ -6,6 +6,9 @@ describe('Class', function () {
   var Base = Class();
 
   var Thing = Class({
+    '@id' : {
+      value: 123
+    },
     name: {
       value: 'Unnamed Item'
     },
@@ -40,6 +43,7 @@ describe('Class', function () {
 
   it('should add properties correctly', function () {
     var thing = new Thing();
+    thing['@id'].should.equal(123);
     thing.name.should.equal('Unnamed Item');
     thing.className.should.have.type('function');
     thing.className().should.equal('Thing');

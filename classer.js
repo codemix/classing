@@ -272,7 +272,12 @@ function makeConfigure (descriptors) {
     key = keys[i];
     descriptor = descriptors[key];
     if (descriptor.writable || descriptor.hasOwnProperty('value') || descriptor.hasOwnProperty('set')) {
-      body += 'this.' + key + ' = config.' + key + ' || this.' + key + ';';
+      if (/^([\w|_|$]+)$/.test(key)) {
+        body += 'this.' + key + ' = config.' + key + ' || this.' + key + ';';
+      }
+      else {
+        body += 'this["' + key + '"] = config["' + key + '"] || this["' + key + '"];';
+      }
     }
   }
   var configure = new Function('config', body); // jshint ignore:line
@@ -297,7 +302,12 @@ function makeToJSON (descriptors) {
     key = keys[i];
     descriptor = descriptors[key];
     if (descriptor.enumerable || descriptor.enumerable == null) {
-      parts.push(key + ': this.' + key);
+      if (/^([\w|_|$]+)$/.test(key)) {
+        parts.push(key + ': this.' + key);
+      }
+      else {
+        parts.push('"' + key + '": this["' + key + '"]');
+      }
     }
   }
   var toJSON = new Function('return {' + parts.join(',') + '};'); // jshint ignore:line
