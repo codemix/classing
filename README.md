@@ -4,6 +4,51 @@
 
 Easy, flexible classes for JavaScript, works in node and all modern browser (> IE8).
 
+# Why another class library?
+
+Because none of the other class libs have a good way to associate meta data with properties, and have that meta data easily available in child classes. This is useful for e.g. defining property labels, types, validation rules etc.
+
+Classer presents an API similar to the native `Object.defineProperty()` and `Object.defineProperties()` methods.
+
+```js
+
+var Class = require('classer');
+
+var User = Class();
+
+User.defineProperty('name', {
+  label: 'Name',
+  value: 'anonymous'
+});
+
+User.defineProperties({
+  email: {
+    label: 'Email Address'
+  },
+  avatarUrl: {
+    label: 'Avatar URL',
+    // getter
+    get: function () {
+      return getGravatarUrl(this.email);
+    }
+  }
+  
+});
+
+
+var user = new User({
+  name: 'charles',
+  email: 'foo@example.com'
+});
+
+console.log(User.descriptors.name.label + ':', user.name); // "Name: charles"
+
+console.log(user.avatarUrl);
+
+```
+
+The main difference between this and the native methods is that the full descriptor declarations are preserved. The native methods discard these extra keys (anything other than `enumerable`, `configurable`, `writable`, `value`, `get` and `set`), making them unsuitable for storing metadata. Classer corrects this and ensures that the descriptors are accessible within child classes. 
+
 
 # Installation
 
@@ -20,6 +65,8 @@ or [bower](http://bower.io/search/?q=classer):
 
 
 # Usage
+
+
 
 **Simple classes**
 
