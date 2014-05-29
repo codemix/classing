@@ -99,6 +99,23 @@ describe('Class', function () {
     });
   });
 
+  describe('Class::initialize()', function () {
+    it('should allow a custom constructor', function () {
+      var wasCalled = false;
+      var MyClass = Class({
+        name: {},
+        initialize: function (config) {
+          wasCalled = true;
+        }
+      });
+      var instance = new MyClass({name: 'foo'});
+
+      wasCalled.should.be.true;
+      instance.name.should.equal('foo');
+
+    });
+  });
+
   describe('Class::configure()', function () {
     var MyClass = Thing.extend({
       setter: {

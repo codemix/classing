@@ -6,12 +6,18 @@
  */
 
 if (typeof module === "undefined" || !module || typeof module.exports === "undefined") {
-  window.Classer = makeClass;
+  window.Classer = Classer;
 }
 else {
-  module.exports = exports = makeClass;
-  exports.create = makeClass;
+  module.exports = exports = Classer;
 }
+
+function Classer (descriptors) {
+  return makeClass(descriptors);
+}
+
+Classer.create = makeClass;
+
 
 
 /**
@@ -23,6 +29,7 @@ else {
 function makeClass (descriptors) {
   descriptors = descriptors || {};
 
+
   var Class = function (config) {
     if (!(this instanceof Class)) {
       return new Class(config);
@@ -30,6 +37,7 @@ function makeClass (descriptors) {
     if (config) {
       this.configure(config);
     }
+    this.initialize();
   };
 
   makePrototype(descriptors, Class);
@@ -234,6 +242,12 @@ function makePrototype (descriptors, Class) {
   for (i = 0; i < total; i++) {
     key = keys[i];
     defineProperty(descriptors, Class.prototype, key, descriptors[key]);
+  }
+
+  if (!descriptors.initialize) {
+    defineProperty(descriptors, Class.prototype, 'initialize', {
+      value: function () {}
+    });
   }
 
   // don't overwrite custom configure functions if supplied.
