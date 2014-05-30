@@ -1,7 +1,7 @@
 {
   "name": "classer",
   "main": "classer.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/codemix/classer",
   "authors": [
     "Charles Pick <charles@codemix.com>"
