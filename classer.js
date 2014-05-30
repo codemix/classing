@@ -244,7 +244,7 @@ Classer.makeStatic = function (Class, descriptors) {
         var keys = Object.keys(descriptors),
             total = keys.length,
             body = '',
-            key, descriptor, i, suffix;
+            key, descriptor, i, suffix, value;
 
         for (i = 0; i < total; i++) {
           key = keys[i];
@@ -255,10 +255,30 @@ Classer.makeStatic = function (Class, descriptors) {
               suffix = '(this)';
             }
             if (/^([\w|_|$]+)$/.test(key)) {
-              body += 'this.' + key + ' = this.constructor.descriptors.' + key + '.default' + suffix + ';'; // jshint ignore:line
+              body += 'this.' + key + ' = this.constructor.descriptors.' + key + '.default' + suffix + ';';
             }
             else {
-              body += 'this["' + key + '"] = this.constructor.descriptors["' + key + '"].default' + suffix + ';'; // jshint ignore:line
+              body += 'this["' + key + '"] = this.constructor.descriptors["' + key + '"].default' + suffix + ';';
+            }
+          }
+          else if (descriptor.bind) {
+            if (/^([\w|_|$]+)$/.test(key)) {
+              if (descriptor.bind === true) {
+                value = 'this';
+              }
+              else {
+                value = 'this.constructor.descriptors.' + key + '.bind';
+              }
+              body += 'this.' + key + ' = this.' + key + '.bind(' + value + ');';
+            }
+            else {
+              if (descriptor.bind === true) {
+                value = 'this';
+              }
+              else {
+                value = 'this.constructor.descriptors["' + key + '"].bind';
+              }
+              body += 'this["' + key + '"] = this["' + key + '"].bind(' + value + ');';
             }
           }
         }

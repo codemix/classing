@@ -116,6 +116,36 @@ describe('Classer', function () {
       instance['@id'].should.equal(123);
       instance.arr.should.eql([1, 2, 3]);
     });
+
+    it('should auto bind functions to the right context', function () {
+      var MyClass = Class.create({
+        '@fn': {
+          bind: true,
+          value: function () {
+            return this.name;
+          }
+        },
+        name: {
+          value: 'no name'
+        },
+        identity: {
+          bind: true,
+          value: function () {
+            return this;
+          }
+        }
+      });
+
+      var instance = new MyClass();
+
+      var fn = instance['@fn'];
+
+      fn().should.equal('no name');
+
+      var identity = instance.identity;
+
+      identity().should.equal(instance);
+    });
   });
 
   describe('Class::initialize()', function () {

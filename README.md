@@ -43,6 +43,34 @@ var person = new Person({
 });
 ```
 
+**Default values**
+
+```js
+var Collection = Class({
+  items: {
+    enumerable: false,
+    default: function () { return []; }
+  },
+  length: {
+    get: function () {
+      return this.items.length;
+    }
+  },
+  push: function () {
+    return this.items.push.apply(this.items, arguments);
+  }
+});
+
+var list = new Collection();
+
+list.length === 0; // true
+
+list.push(1, 2, 3);
+
+list.length === 3; // true
+
+
+```
 
 **Inheritance**
 
@@ -75,7 +103,7 @@ var Car = RoadVehicle.extend({
 
 var mini = new Car({
   name: 'mini',
-  capacity: 3.5
+  capacity: 28
 });
 
 console.log(mini.capacityPerWheel);
@@ -101,39 +129,38 @@ console.log(truck.capacityPerWheel);
 ```
 
 
-**Meta programming**
+**Auto Binding**
 
 ```js
-
-var AutoBinding = Class();
-
-Object.defineProperty(AutoBinding, 'defineProperty', {
-  value: function (name, descriptor) {
-    descriptor = descriptor || {};
-    if (typeof descriptor.value === 'function') {
-      descriptor.value = descriptor.value.bind(this);
-    }
-    Class.defineProperty.call(this, name, descriptor);
-  }
-});
-
-
-var MyConsole = AutoBinding.extend({
-  log: {
+var MyConsole = Class.create({
+  alert: {
+    bind: true,
     value: function (message) {
-      this.console.log('[' + new Date() + ']', message);
+      this.alertCalledCount++;
+      console.warn(message);
     }
   },
-  console: {
-    value: console
+  log: {
+    bind: console,
+    value: console.log
+  },
+  alertCalledCount: {
+    value: 0
   }
 });
 
 var myconsole = new MyConsole(),
+    alert = myconsole.alert,
     log = myconsole.log;
 
-log('Hello');
-log('World');
+myconsole.alertCalledCount.should.equal(0);
+
+alert('Hello');
+alert('World');
+
+myconsole.alertCalledCount.should.equal(2);
+
+log('If you can see this in the console, it worked.');
 
 ```
 
