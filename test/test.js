@@ -449,7 +449,7 @@ describe('Classer', function () {
 
     it('should create a subclass with default values', function () {
       var MyFactory = CustomClasser.extend(),
-          MyClass = MyFactory.create();
+          MyClass = MyFactory();
       var instance = new MyClass();
       constructedCount.should.equal(2);
     });

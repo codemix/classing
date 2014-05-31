@@ -404,9 +404,25 @@ Classer.makePrototype = function (Class, descriptors) {
  */
 Classer.extend = function (descriptors) {
   descriptors = descriptors || {};
-  var keys = Object.keys(descriptors),
+
+  function Child (descriptors) {
+    return Child.create(descriptors);
+  }
+
+
+  var keys = Object.keys(this),
       total = keys.length,
       i, key;
+
+
+  for (i = 0; i < total; i++) {
+    key = keys[i];
+    Child[key] = this[key];
+  }
+
+  keys = Object.keys(descriptors);
+  total = keys.length;
+
 
   for (i = 0; i < total; i++) {
     key = keys[i];
@@ -417,7 +433,8 @@ Classer.extend = function (descriptors) {
       };
     }
   }
-  var Child = Object.create(this, descriptors);
+
+  Object.defineProperties(Child, descriptors);
   Child.super = this;
   return Child;
 };
