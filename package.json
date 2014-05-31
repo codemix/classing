@@ -5,7 +5,7 @@
   "main": "classer.js",
   "scripts": {
     "all": "npm test; npm run coverage; npm run minify",
-    "prepublish": "npm all",
+    "prepublish": "npm run all",
     "pretest": "./node_modules/.bin/jshint ./classer.js",
     "test": "./node_modules/mocha/bin/mocha",
     "watch": "./node_modules/mocha/bin/mocha  --watch",
