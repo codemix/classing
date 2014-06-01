@@ -1,20 +1,20 @@
 {
-  "name": "classer",
+  "name": "classing",
   "version": "0.0.4",
   "description": "Fluent classes for node.js and the browser.",
-  "main": "classer.js",
+  "main": "classing.js",
   "scripts": {
     "all": "npm test; npm run coverage; npm run minify",
     "prepublish": "npm run all",
-    "pretest": "./node_modules/.bin/jshint ./classer.js",
+    "pretest": "./node_modules/.bin/jshint ./classing.js",
     "test": "./node_modules/mocha/bin/mocha",
     "watch": "./node_modules/mocha/bin/mocha  --watch",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-    "minify": "./node_modules/.bin/uglifyjs -o ./classer.min.js ./classer.js"
+    "minify": "./node_modules/.bin/uglifyjs -o ./classing.min.js ./classing.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codemix/classer"
+    "url": "https://github.com/codemix/classing"
   },
   "keywords": [
     "class",
@@ -24,9 +24,9 @@
   "author": "Charles Pick <charles@codemix.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codemix/classer/issues"
+    "url": "https://github.com/codemix/classing/issues"
   },
-  "homepage": "https://github.com/codemix/classer",
+  "homepage": "https://github.com/codemix/classing",
   "devDependencies": {
     "expect.js": "~0.3.1",
     "should": "~3.3.1",

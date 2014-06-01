@@ -5,17 +5,11 @@
  * Main entry point
  */
 
-if (typeof module === "undefined" || !module || typeof module.exports === "undefined") {
-  window.Classer = Classer;
-}
-else {
-  module.exports = exports = Classer;
+function Classing (descriptors) {
+  return Classing.create(descriptors);
 }
 
-function Classer (descriptors) {
-  return Classer.create(descriptors);
-}
-
+module.exports = exports = Classing;
 
 /**
  * Make a class with the given property descriptors.
@@ -23,7 +17,7 @@ function Classer (descriptors) {
  * @param  {Object}   descriptors An object containing the property descriptors for the class.
  * @return {Function}             The created class.
  */
-Classer.create = function (descriptors) {
+Classing.create = function (descriptors) {
   descriptors = descriptors || {};
 
   var Class = this.makeConstructor();
@@ -38,7 +32,7 @@ Classer.create = function (descriptors) {
  * Make a constructor for a class.
  * @return {Function} The constructor function.
  */
-Classer.makeConstructor = function () {
+Classing.makeConstructor = function () {
   function Class (config) {
     if (!(this instanceof Class)) {
       return new Class(config);
@@ -59,8 +53,8 @@ Classer.makeConstructor = function () {
  * @param  {Function} Class        The class itself.
  * @param  {Object}   descriptors  The property descriptors for the class.
  */
-Classer.makeStatic = function (Class, descriptors) {
-  var Classer = this; // to allow subclassing
+Classing.makeStatic = function (Class, descriptors) {
+  var Classing = this; // to allow subclassing
   Object.defineProperties(Class, {
     /**
      * Create a new instance of the class.
@@ -204,7 +198,7 @@ Classer.makeStatic = function (Class, descriptors) {
     extend: {
       configurable: true,
       value: function (config) {
-        var Child = Classer.create(config);
+        var Child = Classing.create(config);
         Child.inherits(this);
         return Child;
       }
@@ -360,12 +354,10 @@ Classer.makeStatic = function (Class, descriptors) {
  * @param  {Function} Class       The class itself.
  * @param  {Object} descriptors   The descriptors for the class.
  */
-Classer.makePrototype = function (Class, descriptors) {
+Classing.makePrototype = function (Class, descriptors) {
   Class.defineProperties(descriptors);
   if (!descriptors.initialize) {
-    Class.defineProperty('initialize', {
-      value: function () {}
-    });
+    Class.defineProperty('initialize', function () {});
   }
 
   // don't overwrite custom applyDefaults functions if supplied.
@@ -400,9 +392,9 @@ Classer.makePrototype = function (Class, descriptors) {
  * Extend the class factory.
  *
  * @param  {Object} descriptors The descriptors for the new class factory.
- * @return {Classer}            The class factory
+ * @return {Classing}            The class factory
  */
-Classer.extend = function (descriptors) {
+Classing.extend = function (descriptors) {
   descriptors = descriptors || {};
 
   function Child (descriptors) {

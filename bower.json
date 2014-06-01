@@ -1,8 +1,8 @@
 {
-  "name": "classer",
-  "main": "classer.js",
+  "name": "classing",
+  "main": "classing.js",
   "version": "0.0.4",
-  "homepage": "https://github.com/codemix/classer",
+  "homepage": "https://github.com/codemix/classing",
   "authors": [
     "Charles Pick <charles@codemix.com>"
   ],
@@ -14,7 +14,7 @@
   "keywords": [
     "oop",
     "classes",
-    "classer"
+    "classing"
   ],
   "license": "MIT",
   "ignore": [

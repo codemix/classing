@@ -1,6 +1,6 @@
-# Classer
+# Classing
 
-[![Build Status](https://travis-ci.org/codemix/classer.svg?branch=master)](https://travis-ci.org/codemix/classer)
+[![Build Status](https://travis-ci.org/codemix/classing.svg?branch=master)](https://travis-ci.org/codemix/classing)
 
 Easy, flexible classes for JavaScript, works in node and all modern browser (> IE8).
 
@@ -8,11 +8,11 @@ Easy, flexible classes for JavaScript, works in node and all modern browser (> I
 
 Because none of the other class libs have a good way to associate meta data with properties, and have that meta data easily available in child classes. This is useful for e.g. defining property labels, types, validation rules etc.
 
-Classer presents an API similar to the native `Object.defineProperty()` and `Object.defineProperties()` methods.
+Classing presents an API similar to the native `Object.defineProperty()` and `Object.defineProperties()` methods.
 
 ```js
 
-var Class = require('classer');
+var Class = require('classing');
 
 var User = Class();
 
@@ -32,7 +32,7 @@ User.defineProperties({
       return getGravatarUrl(this.email);
     }
   }
-  
+
 });
 
 
@@ -47,20 +47,20 @@ console.log(user.avatarUrl);
 
 ```
 
-The main difference between this and the native methods is that the full descriptor declarations are preserved. The native methods discard these extra keys (anything other than `enumerable`, `configurable`, `writable`, `value`, `get` and `set`), making them unsuitable for storing metadata. Classer corrects this and ensures that the descriptors are accessible within child classes. 
+The main difference between this and the native methods is that the full descriptor declarations are preserved. The native methods discard these extra keys (anything other than `enumerable`, `configurable`, `writable`, `value`, `get` and `set`), making them unsuitable for storing metadata. Classing corrects this and ensures that the descriptors are accessible within child classes.
 
 
 # Installation
 
-Via [npm](https://npmjs.org/package/classer):
+Via [npm](https://npmjs.org/package/classing):
 
-    npm install --save classer
-
-
-or [bower](http://bower.io/search/?q=classer):
+    npm install --save classing
 
 
-    bower install --save classer
+or [bower](http://bower.io/search/?q=classing):
+
+
+    bower install --save classing
 
 
 
@@ -71,7 +71,7 @@ or [bower](http://bower.io/search/?q=classer):
 **Simple classes**
 
 ```js
-var Class = require('classer');
+var Class = require('classing');
 
 var Person = Class({
   name: {

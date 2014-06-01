@@ -1,4 +1,4 @@
-var Class = require('../classer'),
+var Class = require('../classing'),
     expect = require('expect.js');
 
 describe('Examples', function () {

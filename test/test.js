@@ -1,7 +1,7 @@
-var Class = require('../classer'),
+var Class = require('../classing'),
     expect = require('expect.js');
 
-describe('Classer', function () {
+describe('Classing', function () {
 
   var Base = Class();
 
@@ -419,9 +419,9 @@ describe('Classer', function () {
 
   });
 
-  describe('Classer.extend()', function () {
+  describe('Classing.extend()', function () {
     var constructedCount = 0;
-    var CustomClasser = Class.extend({
+    var CustomClassing = Class.extend({
       makeConstructor: function () {
         function CustomClass (config) {
           if (!(this instanceof CustomClass)) {
@@ -441,14 +441,14 @@ describe('Classer', function () {
       }
     });
     it('should be easy to extend', function () {
-      var MyClass = CustomClasser.create();
+      var MyClass = CustomClassing.create();
       constructedCount.should.equal(0);
       var instance = new MyClass();
       constructedCount.should.equal(1);
     });
 
     it('should create a subclass with default values', function () {
-      var MyFactory = CustomClasser.extend(),
+      var MyFactory = CustomClassing.extend(),
           MyClass = MyFactory();
       var instance = new MyClass();
       constructedCount.should.equal(2);
