@@ -197,6 +197,13 @@ describe('Classing', function () {
   });
 
 
+  describe('Class::toString()', function () {
+    it('should define a `toString` function', function () {
+      var thing = new Thing();
+      (''+thing).should.equal('[object Thing]');
+    });
+  });
+
   describe('Class.create()', function () {
     it('should create a new class instance', function () {
       var thing = Thing.create();
