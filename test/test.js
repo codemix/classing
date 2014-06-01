@@ -5,7 +5,7 @@ describe('Classing', function () {
 
   var Base = Class();
 
-  var Thing = Class({
+  var Thing = Class('Thing', {
     '@id' : {
       value: 123
     },
@@ -27,7 +27,7 @@ describe('Classing', function () {
   Thing.staticMethod = function () { return 'Thing'; };
 
 
-  var Person = Class({
+  var Person = Class('Person', {
     name: {
       value: 'Unnamed Person'
     },
@@ -40,6 +40,12 @@ describe('Classing', function () {
     }
   });
 
+
+  it('should apply class names correctly', function () {
+    Base.name.should.equal('Class'); // the default value
+    Thing.name.should.equal('Thing');
+    Person.name.should.equal('Person');
+  });
 
   it('should add properties correctly', function () {
     var thing = new Thing();
@@ -177,7 +183,7 @@ describe('Classing', function () {
       }
     })
     it('configure an object correctly', function () {
-      var obj = new MyClass();
+      var obj = new MyClass('MyClass');
       obj.configure({
         name: 'myname',
         setter: 'wat'
@@ -266,7 +272,7 @@ describe('Classing', function () {
     });
 
     it('should inherit from native objects', function () {
-      var MyError = Class.create();
+      var MyError = Class.create({});
       MyError.inherits(Error);
 
       var err = new MyError();

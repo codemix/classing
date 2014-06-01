@@ -6,8 +6,8 @@
  * Main entry point
  */
 
-function Classing (descriptors) {
-  return Classing.create(descriptors);
+function Classing (name, descriptors) {
+  return Classing.create(name, descriptors);
 }
 
 module.exports = exports = Classing;
@@ -18,10 +18,16 @@ module.exports = exports = Classing;
  * @param  {Object}   descriptors An object containing the property descriptors for the class.
  * @return {Function}             The created class.
  */
-Classing.create = function (descriptors) {
-  descriptors = descriptors || {};
+Classing.create = function (name, descriptors) {
+  if (name && typeof name === 'string') {
+    descriptors = descriptors || {};
+  }
+  else {
+    descriptors = name || {};
+    name = 'Class';
+  }
 
-  var Class = this.makeConstructor();
+  var Class = this.makeConstructor(name);
 
   this.makeStatic(Class, descriptors);
   this.makePrototype(Class, descriptors);
@@ -31,21 +37,20 @@ Classing.create = function (descriptors) {
 
 /**
  * Make a constructor for a class.
- * @return {Function} The constructor function.
+ *
+ * @param  {String} name The name of the class.
+ * @return {Function}    The constructor function.
  */
-Classing.makeConstructor = function () {
-  function Class (config) {
-    if (!(this instanceof Class)) {
-      return new Class(config);
-    }
-    this.applyDefaults();
-    if (config) {
-      this.configure(config);
-    }
-    this.initialize();
-  }
-
-  return Class;
+Classing.makeConstructor = function (name) {
+  var body = 'return function ' + name + ' (config) {' +
+             '  if (!(this instanceof ' + name + ')) {' +
+             '    return new ' + name + '(config);' +
+             '  }' +
+             '  this.applyDefaults();' +
+             '  if (config) { this.configure(config); }' +
+             '  this.initialize();' +
+             '};';
+  return new Function(body)(); // jshint ignore:line
 };
 
 /**
