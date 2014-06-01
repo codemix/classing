@@ -1,6 +1,6 @@
 {
   "name": "classing",
-  "main": "classing.js",
+  "main": "lib/index.js",
   "version": "0.0.4",
   "homepage": "https://github.com/codemix/classing",
   "authors": [
@@ -8,7 +8,6 @@
   ],
   "description": "Easy, flexible classes for JavaScript, works in node and all modern browser (> IE8).",
   "moduleType": [
-    "globals",
     "node"
   ],
   "keywords": [

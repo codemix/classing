@@ -1,4 +1,4 @@
-var Class = require('../classing'),
+var Class = require('../lib'),
     expect = require('expect.js');
 
 describe('Examples', function () {
