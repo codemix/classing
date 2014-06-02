@@ -1,8 +1,8 @@
 {
   "name": "classing",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Fluent classes for node.js and the browser.",
-  "main": "classing.js",
+  "main": "lib/index.js",
   "scripts": {
     "all": "npm test; npm run coverage; npm run minify",
     "prepublish": "npm run all",
