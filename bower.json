@@ -1,7 +1,7 @@
 {
   "name": "classing",
   "main": "lib/index.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "homepage": "https://github.com/codemix/classing",
   "authors": [
     "Charles Pick <charles@codemix.com>"
@@ -21,6 +21,8 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "coverage",
+    "package.json"
   ]
 }
