@@ -186,8 +186,8 @@ Classing.makeStatic = function (Class, descriptors) {
      */
     extend: {
       configurable: true,
-      value: function (config) {
-        var Child = Classing.create(config);
+      value: function (name, config) {
+        var Child = Classing.create(name, config);
         Child.inherits(this);
         return Child;
       }
@@ -400,8 +400,8 @@ Classing.makePrototype = function (Class, descriptors) {
 Classing.extend = function (descriptors) {
   descriptors = descriptors || {};
 
-  function Child (descriptors) {
-    return Child.create(descriptors);
+  function Child (name, descriptors) {
+    return Child.create(name, descriptors);
   }
 
 
