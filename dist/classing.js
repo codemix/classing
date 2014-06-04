@@ -331,7 +331,7 @@ Classing.makeStatic = function (Class, descriptors) {
       configurable: true,
 
       value: function (descriptors) {
-        var keys = Object.keys(descriptors),
+        var keys = Object.keys(descriptors).sort(),
             total = keys.length,
             parts = [],
             key, descriptor, i;
