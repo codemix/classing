@@ -369,7 +369,7 @@ describe('Classing', function () {
           return 'Visitor'
         },
         parentClass: function () {
-          return this.super.className();
+          return this.__super__.className();
         }
       });
     });

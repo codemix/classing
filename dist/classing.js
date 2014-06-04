@@ -162,10 +162,11 @@ Classing.makeStatic = function (Class, descriptors) {
             descriptors[key] = superDescriptors[key];
           }
         }
-        descriptors.super = {
+        descriptors.__super__ = {
           enumerable: false,
           value: Super.prototype
         };
+        this.__super__ = Super;
         this.prototype = Object.create(Super.prototype, descriptors);
         this.prototype.constructor = this;
         // don't overwrite custom toString functions if supplied.
