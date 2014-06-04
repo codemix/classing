@@ -357,26 +357,28 @@ describe('Classing', function () {
   });
 
   describe('Class.extend()', function () {
+    var Visitor;
 
-
-    var Visitor = Person.extend({
-      name: {
-        value: 'Unnamed Visitor'
-      },
-      visitedAt: {},
-      className: function () {
-        return 'Visitor'
-      },
-      parentClass: function () {
-        return this.super.className();
-      }
+    before(function () {
+      Visitor = Person.extend('Visitor', {
+        name: {
+          value: 'Unnamed Visitor'
+        },
+        visitedAt: {},
+        className: function () {
+          return 'Visitor'
+        },
+        parentClass: function () {
+          return this.super.className();
+        }
+      });
     });
 
-
+    it('should assign the correct name', function () {
+      Visitor.name.should.equal('Visitor');
+    });
 
     it('should inherit from other classes', function () {
-      Visitor.inherits(Person);
-
       var visitor = new Visitor();
 
       visitor.should.be.an.instanceOf(Visitor);
