@@ -1,6 +1,6 @@
 {
   "name": "classing",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Fluent classes for node.js and the browser.",
   "main": "lib/index.js",
   "scripts": {
