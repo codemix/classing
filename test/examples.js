@@ -79,9 +79,9 @@ describe('Examples', function () {
         capacity: 28
       });
 
-      mini.should.be.instanceOf(Vehicle);
-      mini.should.be.instanceOf(RoadVehicle);
       mini.should.be.instanceOf(Car);
+      mini.should.be.instanceOf(RoadVehicle);
+      mini.should.be.instanceOf(Vehicle);
       mini.capacityPerWheel.should.equal(7);
     });
 

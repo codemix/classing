@@ -63,6 +63,8 @@ describe('Classing', function () {
       var thing = new Thing();
       thing.name.should.equal('Unnamed Item');
       thing.url.should.equal('http://example.com/');
+      thing.url = 'http://codemix.com/';
+      thing.url.should.equal('http://codemix.com/');
     });
 
     it('should configure objects correctly', function () {
@@ -70,7 +72,6 @@ describe('Classing', function () {
         name: 'codemix',
         url: 'http://codemix.com/'
       });
-
       thing.name.should.equal('codemix');
       thing.url.should.equal('http://codemix.com/');
     });
@@ -95,6 +96,17 @@ describe('Classing', function () {
 
     it('should do nothing if no properties are specified', function () {
       Thing.defineProperties();
+    });
+  });
+
+  describe('Class.getOwnPropertyDescriptor()', function () {
+    it('should get the descriptor for a property', function () {
+      Thing.getOwnPropertyDescriptor('name').should.have.properties({
+        default: 'Unnamed Item'
+      });
+    });
+    it('should return undefined for a missing property', function () {
+      expect(Thing.getOwnPropertyDescriptor('somemissingvalue')).to.equal(undefined);
     });
   });
 
@@ -197,7 +209,7 @@ describe('Classing', function () {
   });
 
 
-  describe('Class::toString()', function () {
+  describe.skip('Class::toString()', function () {
     it('should define a `toString` function', function () {
       var thing = new Thing();
       (''+thing).should.equal('[object Thing]');
@@ -289,7 +301,6 @@ describe('Classing', function () {
     it('should inherit from native objects', function () {
       var MyError = Class.create({});
       MyError.inherits(Error);
-
       var err = new MyError();
       err.should.be.an.instanceOf(MyError);
       err.should.be.an.instanceOf(Error);
@@ -444,8 +455,8 @@ describe('Classing', function () {
 
   describe('Classing.extend()', function () {
     var constructedCount = 0;
-    var CustomClassing = Class.extend({
-      makeConstructor: function () {
+    var CustomClassFactory = Class.Factory.extend({
+      createConstructor: function () {
         function CustomClass (config) {
           if (!(this instanceof CustomClass)) {
             return new CustomClass(config);
@@ -458,21 +469,21 @@ describe('Classing', function () {
           constructedCount++;
         }
         return CustomClass;
-      },
-      descriptors: {
-        configurable: true
       }
     });
+
     it('should be easy to extend', function () {
-      var MyClass = CustomClassing.create();
+      var factory = new CustomClassFactory();
+      var MyClass = factory.create();
       constructedCount.should.equal(0);
       var instance = new MyClass();
       constructedCount.should.equal(1);
     });
 
     it('should create a subclass with default values', function () {
-      var MyFactory = CustomClassing.extend(),
-          MyClass = MyFactory();
+      var MyFactory = CustomClassFactory.extend(),
+          factory = new MyFactory(),
+          MyClass = factory.create();
       var instance = new MyClass();
       constructedCount.should.equal(2);
     });
